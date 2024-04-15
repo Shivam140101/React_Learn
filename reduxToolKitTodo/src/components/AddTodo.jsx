@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../features/todo/todoSilce";
+import { addTodo , updateTodo } from "../features/todo/todoSilce";
 
 export default function AddTodo() {
   const [input, setInput] = useState("");
+
 
   const dispatch = useDispatch();
 
@@ -12,6 +13,12 @@ export default function AddTodo() {
     dispatch(addTodo(input));
     setInput("");
   };
+
+  const updateTodoHandler = (e) => {
+    e.preventDefault();
+    dispatch(updateTodo(input));
+    setInput("");
+  }
 
   return (
     <>
@@ -27,7 +34,7 @@ export default function AddTodo() {
           type="submit"
           className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
         >
-          Add Todo
+          {updateTodoHandler ? `update` : `Add Todo`}
         </button>
       </form>
     </>
